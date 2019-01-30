@@ -35,7 +35,9 @@ fi
 
 cd "${SYNC_DIR}"
 
-git pull origin "${GIT_REPO_BRANCH}" || die "git pull failed"
+git fetch
+
+git reset --hard origin/"${GIT_REPO_BRANCH}"
 
 git add --all . || die "git add failed"
 

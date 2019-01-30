@@ -1,6 +1,8 @@
 # docker-git-sync
 A docker image allowing you to sync a folder with a git repository.
 
+This folk uses hard reset instead of merging for syncing git, it avoids merge failures if force push is used.
+
 To use it, you must pass the following **environment variables**:
 
 * `GIT_REPO_URL`: URL of the Git repository to sync to, for example `ssh://git@example.com/foo/bar.git`.
