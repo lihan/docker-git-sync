@@ -38,25 +38,3 @@ cd "${SYNC_DIR}"
 git fetch
 
 git reset --hard origin/"${GIT_REPO_BRANCH}"
-
-git add --all . || die "git add failed"
-
-git diff-index --quiet HEAD
-
-CHANGES_CODE=$?
-
-if [ ${CHANGES_CODE} -ne 0 ]
-then
-  echo "Unsynced changes detected. Performing git commit and push."
-  git commit -a -m "Sync" || die "git commit failed"
-else
-  echo "No changes to commit."
-fi
-
-CHANGES_TO_PUSH=$(git diff --stat --cached "origin/${GIT_REPO_BRANCH}")
-
-if [ -n "${CHANGES_TO_PUSH}" ]; then
-  git push origin "${GIT_REPO_BRANCH}" || die "git push failed"
-else
-  echo "No changes to push"
-fi
